@@ -1,0 +1,16 @@
+Documentation
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
+Video Material
+
+https://javabrains.io/topics/corejs
+
+Symbol Primitive type supported in ECMA 6
+
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+https://developer.mozilla.org/en-US/docs/Glossary/Symbol
+
+Javascript DataTypes
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures

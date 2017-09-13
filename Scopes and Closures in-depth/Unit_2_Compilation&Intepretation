@@ -1,0 +1,99 @@
+2.1 : Compilation and Intepretation
+
+-JS is said to be a intepreted language. But still it has a compilation step.
+-Intepretation?
+Ans: When a code is executed on a compiler, the compiler creates an intermediate file which is the final object
+using which the code will be executed. This file is the intermediate file, this state is called is intepretation.
+
+-Compilation?
+Ans: Identifies and recorgnises the errors in the code.
+
+-In JS, not only intepretation occurs, but compilation also occurs for a fraction of second.
+-The browser is the runtime for JS,this runtime just includes the JS code that has to be executed. the code is passed on,
+-During the compilation,it is responsible in recognising the important variables etc required for execution.
+It is not responsibe to find errors and not generate intermediate file.
+-During the intepretation, it juts executes the code.
+
+2.2 : Compilation Phase
+
+-In this phase, the variables are recognised and they are assigned to their scopes to which they fall.
+-compiler just looks at the LHS of the variable declaration.
+
+var a = 10;
+var b = 20;
+function funName (num) {
+  var c = a+b;
+}
+
+funName(8)
+-Here, variable a,b and function funName is saved in global scope,
+but variable c and num will come under funName scope.
+
+2.3 : Intepretation Phase
+
+-In this Phase, the function calls are made to complete the execution, this phase looks only at the RHS of the declarations.
+-By using the scope tables created in the compilation stage, variables are accessed.
+-if the variable is not found under a particular scope, the intpreter moves one level up towards the global scope to find the
+variable under scopes.
+
+2.4 : Global Scope
+
+-During a read operation,
+var a = 10;
+function funName{
+  console.log(c);
+}
+-here the c variable is not declared and a read operation is being performed on it, which reports an error.
+-The intepretor checks for the variable c in the funName scope then in the global scope, failing to do so, it reports an error.
+
+-During a write operation,
+var a = 10;
+function funName{
+  c = 20;
+}
+-here the variable c is not declared but defined, this line of code is skipped during compilation and no scope is assigned to it.
+-in the intepretation it checks for the scope of c in the funName then in the global, as it could not find it anywhere,
+it assumes that the user requires a declaration and declares it in the global scope, even though the line is present inside
+the funName scope.
+
+2.5 : Example
+
+2.6 : Hoisting
+
+-Hoisting means declaring and defining the variables at the top like hoisting a flag to avoid confusions.
+-Ambiguity doesnt occur when variables are defined then declared and function definition is done before declaration.
+-But occurs when function expressions are used.
+
+a = 10;
+var a; // this is valid as in compilation a=10 is ignored and the 2nd line is accepted, so interpretation happens smoothly.
+similarly,
+myFun();
+
+function myFun(){
+ // body
+}
+
+Ambiguity case:
+myFun();
+
+var myFun = function(){
+  //body
+};
+-in this case, during compilation phase, myFun is kept in the global scope without knowing that it is a function type.
+-During intepretation, when intepreter searches for myFun in scope library, it will find nothing assigned to it.
+
+
+2.7 : Strict Mode
+
+-Using this mode, the coding style becomes like any other language, like the variable has to be declared then defined then can be
+used, without the declaration the variable cannot be used.
+-This mode can be activated by using, "using strict" in the starting of the code.
+-If strict mode has to be enabled in a seperate function, it should be placed inside it,
+function myFun(){
+"use strict"
+}
+-Strict mode restricts usage of some functionality.
+"use strict"
+var myName;
+
+myname="name"; // reports an error as declaration is different from usage.

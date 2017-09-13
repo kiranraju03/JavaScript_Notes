@@ -1,0 +1,78 @@
+1.1: Introduction
+
+Scopes and closures help in,
+-Writing elegent and clean codes.
+-To crack the points where errors can occur.
+
+1.2: Function Declaration and expression
+
+Refer JS for developers Unit 4
+
+1.3: Scopes and block scoping
+
+-Scopes are used to create blocks inside codes,in which those blocks won't communicate with each other,
+variables and functions created inside the blocks can be used only by the block itself, no other element can access it.
+-A scope can have another scope inside it, this concept is called block scoping.
+-In block scoping, the inner most block can access the elements of the outer block and even the elements outside the outer block.
+-But the outer block cannot access the elements of the inner block.
+
+1.4: Function scoping in JS
+
+-Scoping cannot be performed by the block mechanism in JS, with the use of function only scoping can be achieved.
+-The variables assigned inside a function is accessable to that function only,if a variable being used inside a function not
+declared then it should be initialized before the function defintion.
+
+var name = "string";
+
+function funName(){
+  if(name === "string"){
+    var dept = "deptName";
+  }
+}
+
+funName();
+console.log(dept); //cannot access the element as it is declared and defined inside a function scope.
+
+
+1.5: Examples
+
+1.6: IIFE-Immediately Invoke Function Expression
+
+-When a function has to be created to maintain the scope of variables, the function name may clash,
+as function names are global variables, to avoid it, we create a IIFE
+
+(function (){
+  var a=10,b=10;
+  console.log(a+b);
+})();
+-The above code makes a functional scope for variables a and b as it is inline it is invoked immediately.
+
+1.7: Read and Write Operation
+
+var a=10; // this is a write operation, where 10 is written on variable a
+concole.log(a); // this is a read operation,where to print the value of a, it reads the value stored in it.
+
+1.8: Implication of read and write opeartion
+
+-A read operation cannot be performed without a definition.
+-A write operation can be performed even if the variables are not declared.
+
+var foo;
+console.log(foo); // read opearation returns error because the variable is declared but not defined.
+
+function funName(name){
+  console.log(name);
+}
+funName("string"); // variable "name" is not explicitly declared, but on the function call it is implicitly declared.
+
+1.9: Window object
+
+-The global variable or function defined are actually the properties of the global object.
+-The global object depends on the runtime environment, if the JS is used in webpages, then the browser on which
+it is executing the window is the object.
+
+in case of window object:
+var g=10;
+Can be accessed by:
+g
+window.g

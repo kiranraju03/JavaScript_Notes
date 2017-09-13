@@ -1,0 +1,127 @@
+3.1 : When constructors aren't good enough
+
+-Prototypes are used to be build a object using a template/blueprint.
+-These blueprints are called classes in other OOP's.
+-Objects created out of these classes are the instances of that class in other OOP's.
+-In JS there is no concept as 'class' so by the use of constructor function every time an instance is created.
+
+function Bicycle(chain, speed, gear, tirepressure){
+  this.chain=chain;
+  this.speed=speed;
+  this.gear=gear;
+  this.tirePressure=tirepressure;
+  this.inflateTires=function(){
+    this.tirePressure += 3;
+  }
+}
+
+var bicycle1= new Bicycle(25,45,20,30);
+var bicycle2= new Bicycle(25,45,20,30);
+-In each instance of object creation,bicycle1 and bicycle2 the properties of the Constructor is assigned.
+-In the case of function, a function object is created by the intepreter and the objects have a copy to it.
+-In the case of classes concept the objects created point to the class methods and parameters.
+
+3.2 : Introduction to Prototype
+
+-Every time a function is created, 2 objects are created along with it, one is object for the function
+and another a prototype object.
+
+function foo(){
+  console.log("hello");
+}
+
+foo(); //function call
+foo //function object
+foo.prototype //function prototype object
+
+-Prototype object will be added as a property to the function. To access that,
+foo.prototype
+-When a function is called using new keyword, a new object is created everytime, that object will have a property,
+__proto__ that points to the prototype object.
+
+var myObj = new foo();
+-myObj object will have a property know as,
+__proto__:Object
+
+3.3 : Property lookup with prototypes
+
+-Property lookups happen when the property being accessed is not present in the object created by the new operator.
+-If the property is present in the prototype object then it returns the value in the protoype object, or else it will return invalid.
+
+var foo(){
+  console.log("nothing");
+}
+var newFoo = new foo();
+newFoo.propr //this property is not present in the object created.
+//it then looks upto newFoo.__proto__ to check is that object has the property.
+
+newFoo=newFoo.__proto__
+
+-If newFoo is updated with a property called propr and even prototype object will have the same object, when we access,
+newFoo.propr // its returns the value in the newFoo object and not in prototype object.
+
+3.4 : Object behaviors using prototypes
+
+-Prototype lookup happens at run-time.
+-Changes made and if new functions are added to the object, dynamically the changes are applied.
+
+function Foo(){
+  console.log("hey");
+}
+
+Foo.prototype.greet = function (){console.log("hello")};
+var obj1 = new Foo();
+var obj2 = new Foo();
+
+obj1.greet();
+obj2.greet(); //both the return hello.
+-As the function is defined in the prototype object, the lookup will occur when the function is not available in the created object.
+-This is similar to class concept, where all the instances point to the same class.
+
+3.5 : Object Links With Prototypes
+
+-__proto__ is called "dunder-proto"
+-Similarly like how function has a link to the prototype and access can be done,
+foo.protoype
+-Prototype has a property in it called the "constructor" which can be used to access the function.
+
+function Foo(){
+  console.log("hey");
+}
+
+var newFoo = new Foo();
+newFoo.__proto__.constructor() //returns function foo()
+
+-All these are reference pointers, they dont keep a copy. There references can be changed.
+
+3.6 : The Object function
+
+-function which is reponsible in the creation of the Object.
+-There is a global function called "Object"
+-In the creation of an object, there are 2 ways:
+
+var simple = {};
+var obj = new Object();
+
+-The function Object si responsible for the object creation.
+obj.__proto__ == simple.__proto__ //both are same as they are created by the same function Object which is a global variable.
+
+simple.__proto__.constructor() //returns function Object()
+
+3.7 : The Prototype object
+
+-Creation of the function's prototype is carried out by the global Object function prototype.
+
+function Foo(){}
+
+var newFoo = new Foo();
+newFoo.__proto__.constructor(); //returns function Foo()
+Foo.prototype.__proto__.constructor(); //return function Object()
+
+-Object.__proto__ is null.
+
+3.8 : Inheritance In JavaScript
+
+-As dunder prototypes have references to other prototypes, it can be changed to share another prototypes functionality.
+
+3.9 : Conclusion

@@ -1,0 +1,10 @@
+JAVABRAINS.IO
+UNIT 4 : FUNCTIONS
+
+Syntax : function functionName(set of arguments){
+        body of the function
+}
+
+-JS is a flexible language, so if the number of arguments for a function are less than the calling function varibles,
+it assigns undefined to the arguments which are not specified in the calling function.
+-if the number of arguments exceed the limit of arguments defined, then JS will ignore the extra arguments provided.

@@ -1,0 +1,126 @@
+JAVABRAINS.IO
+UNIT 4 : FUNCTIONS
+
+4.1:Introduction to Functions
+
+Syntax : function functionName(set of arguments){
+        body of the function
+} //This syntax is called function declaration
+
+4.2: Flexible argument count
+
+-JS is a flexible language, so if the number of arguments for a function are less than the calling function varibles,
+it assigns undefined to the arguments which are not specified in the calling function.
+-if the number of arguments exceed the limit of arguments defined, then JS will ignore the extra arguments provided.
+
+Defined function:
+function add(var a,var b){
+  var c=a+b;
+}
+
+Less arguments calling function:
+add(5);
+in this case, it assigns b with undefined.
+
+More arguments calling function:
+add(5,7,8,9);
+it results in ignoring 8,9.
+
+4.3: Return values
+
+-A function can return by using the keyword "return".
+-Even if a function doesnt return anything explicitly, if we check by assigning it to a variable, the variable will have undefined.
+
+function functionName(){
+  return;
+}
+
+var sample = functionName();
+-Now sample variable will have undefined in it.
+
+4.4: Function Expression
+
+-An alternative way to define the functions is using function expression.
+-In JS, function is itself treated as a value that can be assigned to a variable and using that variable
+function calls can be made.
+
+var funVar = function functionName(){
+  //body of the function
+}; //this syntax is called function expression
+
+funVar(); //JS searches for the variable funVar to which a function type value is assigned to and
+calls that function assigned to it.
+
+4.5 : Anonymous function expression
+
+-It is similar to function expression with the difference that the avlue assigned function need not need a function name,
+the variable name can be used to make calls to it.
+
+var funVar = function (){
+  //body of the function
+};
+
+funVar();
+
+4.6: Function as arguments
+
+-A function can be passed as an argument to another function.
+
+var funVar = function (name){
+ console.log("hello"+name);
+};
+
+var funVar2 = function (fun, name){
+  fun(name);
+};
+
+funVar2(funVar,"string"); //displays hello string
+
+4.7: Function in objects
+
+-We can assign functions to objects with the use of function expressions.
+
+var myObj = {
+  "number" : 0
+};
+
+myObj.myFunc = function (){
+  console.log("function in myObj object");
+};
+
+To access:
+myObj.myFunc(); //displays function in myObj object.
+
+4.8: "this" keyword
+
+-this keyword is used to point to the same object that it is present in.
+
+var myObj = {
+"number" : 0,
+"number2" : 2
+"combineNumber": function (){
+  return this.number+this.number2;
+}
+};
+
+var add = myObj.combineNumber();
+console.log(add); // displays 2
+
+4.9 & 4.10 is exercise code
+
+4.11 : Default Implicit arguments in a function
+
+-Implicit arguments holds all the values passed onto the function during its call
+no matter if the number exceeds the function declaration.
+-the arguments can be accessed by treating it as an array.
+
+function funName(){
+  console.log(arguments); //prints Arguments{0:1,1:2,2:3,3:4,4:5,2 more}
+  var i,sum=0;
+  for(i=0; i<arguments.length ; i++){
+  sum+=arguments[i];  //the sum of all the arguments sent in the calling function is computed i.e., 15
+  }
+  return sum;
+}
+
+console.log(funName(1,2,3,4,5)); //prints 15

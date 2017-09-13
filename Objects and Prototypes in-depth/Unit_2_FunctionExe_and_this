@@ -1,0 +1,115 @@
+2.1 : Function Execution Types
+
+-There are 4 ways:
+
+1: function defintion and call.
+here function object is created while call and function call happens.
+function foo(){
+  console.log("hi");
+}
+foo();  //function object is created.
+
+2: By keeping the function in an object and calling the object property.
+var obj={};
+obj.foo = function(){
+  console.log("hi");
+};
+
+obj.foo();  //calling the function object inside the obj object.
+
+3: Using new keyword
+function foo(){
+  console.log("hi");
+}
+
+new foo(); //creates a new object with this reference
+
+4: Using call method
+function foo(){
+console.log("hi!");
+}
+
+foo();
+foo.call(); //lines 32,33 means the same.
+-Call method is created inside the fucntion when the function object is created.
+-This call method can be used to link the this reference of the function it is refering to, to another object's this reference.
+when the object is passed as an argument to it,
+foo.call(Obj); //links the this pointer of function foo to object Obj.
+
+2.2 : The this argument values
+
+-Implicit argument in a function is "this" and "arguments".
+-Anytime a function is written this points to some reference. Reference depends on the function call.
+-For execution of a function, a execution context is required which holds all the information
+regarding the function call, like data that the function requires.
+-Function uses this execution context for its execution and accesses the data from context.
+-The contents of the execution context depend on the type of function call.
+-In the first method of function execution, this refers to a global object.
+function foo(){
+  console.log("hi");
+  console.log(this); //returs window if run on a browser.
+}
+foo();
+-When JS is run on a browser, the global object is the "window" object representing the window.
+-In the second method, this refers to the object itself which holds the function as its property.
+var obj={};
+obj.foo = function(){
+  console.log("hi");
+  console.log(this); //returns the object.
+};
+
+obj.foo();  //calling the function object inside the obj object.
+
+-In the third method, this refers to newly created object.
+function foo(){
+  console.log("hi");
+  console.log(this); //returns the newly created object
+}
+
+new foo();
+
+2.3 : Working on objects with this reference
+
+function Bicycle(chain, speed, gear, tirepressure){ //#1
+  this.chain=chain;
+  this.speed=speed;
+  this.gear=gear;
+  this.tirePressure=tirepressure;
+  this.inflatePressure=function(){ //#2
+    this.tirePressure += 3;
+  }
+}
+
+var bicycle1=new Bicycle(25,45,6,7);//constructor call, this reference is created
+//pointing to the object itself.
+-There are 2 this pointers in the Bicycle function, the this refernce of the constructor
+function, which points to the newly created object, when the constructor is called.
+-2nd pointer is inside the method of the object which points to the object itself, as it is the property of the object.
+
+2.4 : Using the call function
+
+-To manipulate the this reference which is already defined,
+ call method is used.
+
+function Bicycle(chain, speed, gear, tirepressure){
+  this.chain=chain;
+  this.speed=speed;
+  this.gear=gear;
+  this.tirePressure=tirepressure;
+  this.inflateTires=function(){
+    this.tirePressure += 3;
+  }
+}
+
+var bicycle1= new Bicycle(25,45,20,30);
+
+function Mechanic(name){
+  this.name=name;
+}
+
+var mike= new Mechanic("Mike");
+mike.infalteTires=bicycle1.inflateTires;
+mike.infalteTires(); //in this case, the this reference points to Object mike itself, which doesn't have inflateTires function
+//and inflatePressure parameter
+mike.inflateTires.call(bicycle1); //in this case,the "this" reference is changed, by linking the this reference of mike with bicycle1 object.
+// by doing so, the mike function can now access the Bicycle object and change the pressure.

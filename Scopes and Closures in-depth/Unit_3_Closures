@@ -1,0 +1,58 @@
+3.1 : Introduction
+
+-Closures are defined as the functions that remembers the scope of the function.
+-Even if the function declaration is done in one scope and the call to it is made from another scope,
+it remembers the scope of the declaration scope.
+
+var a = 10;
+function outer(){
+  var b = 20;
+
+  var inner= function(){
+    console.log(a);
+    console.log(b);
+  };
+  return inner;
+}
+
+var innerfn = outer();
+innerfn();
+-In the above code, even if the inner function declaration is done inside the scope of outer function, when the call
+is made outside the outer function also, the snapshot of the scope where the function has been declared also
+will be associated with the assignment done. i.e., var innerfn = outer();
+
+3.2 : Closures in-Detail
+
+-Each time the program is run, a copy of the variable is created again and again.
+-The previously used variable will no longer be used, it will be replaced witha newer value as in the assignment.
+
+var a = 10;
+function outer(){
+  var b = 20;
+
+  var inner= function(){
+    a++;
+    b++;
+    console.log(a);
+    console.log(b);
+  };
+  return inner;
+}
+
+var innerfn = outer();
+innerfn();
+
+var innerfn2 = outer();
+innerfn2();
+OUTPUT:
+11
+21
+12
+21
+-Variable a is a global variable so it got used in the same way as innerfn when innerfn2 was called.
+-But variable b got used as 20 when innerfn was called, and even when innerfn2 was called, again b got 20 initilaized,
+it did not use the previous value 21.
+
+3.3 : Closures in Callbacks
+
+setTimeout(function, time in ms) // used to execute the function after a specifed time.

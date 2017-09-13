@@ -1,0 +1,79 @@
+1.1 : Introduction
+
+-JS is a object oriented language. Means creating objects
+to solve complex problems.
+-Creating objects for each entity and defining its parameters
+and even define the interaction between the objects for them
+to communicate.
+
+1.2 : Object Basics
+
+-Object is a collection of multiple values.
+
+Inline Object creation:
+var myObj = {};
+-To add properties to an object:
+myObj.newProp="value";
+-To access the property:
+myObj["newProp"]
+
+1.3 : Creating objects
+
+-To create multiple objects which has to be done recursicely,
+in the case of creating an object for each employee
+in a company, creating a function which takes in the parameters
+the details of the employees and assigns it to object variables.
+
+var emp1 = {
+  "firstName" = "kiran",
+  "lastName" = "raju",
+  "age" = "21"
+};
+
+function createObject(first,last,age){
+  var newObj={};
+  newObj.firstName=first;
+  newObj.lastName=last;
+  newObj.age=age;
+  return newObj;
+}
+var emp2=createObject("raj","raj","23");
+
+1.4 : JavaScript Constructors
+
+-Learn how to write constructor functions and call them
+using the new operator.
+-By using the new keyword prior to function name, it converts
+the function into a constructor which is  basically used to
+construct objects.
+-By the use of constructors, there is no need to initialise
+and return the object. Because it only constructs it.
+-The object reference is mainitained by the "this" keyword.
+
+function createObject(first,last,age){
+  //var this={};
+  this.firstName=first;
+  this.lastName=last;
+  this.age=age;
+  //return this;
+}
+var emp2 = new createObject("raj","raj","23");
+
+1.5 : Difference between regular functions and constructors
+
+-Regular functions have object initialization and return statements.
+-Constructors have this keyword and do both initilize and return as in-built.
+-regular functions use camel case for its name.
+-Constructors will use word starting with capital to represent it as a constructor.
+-Regular functions use normal function call
+-Constructors use new keyword before its function name.
+
++In other OOP, new keyword is used to create instance of a class,
+but in JS new is used to create an object.
+
+1.6 : Switching function types and calls
+
+-When regular function is called along with new keyword, it works fine,
+but the creation of this object gets wasted.
+-When constructors are called without new keyword, then the object properties,
+is assigned to a global this object, and the call doesn't return anything.
