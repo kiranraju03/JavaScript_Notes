@@ -1,0 +1,55 @@
+<html>
+<head>
+  <script type="text/javascript">
+	function extract(){
+	params='';
+	type='';
+	var field = document.formName.elements;
+  	for( var i=1; i<document.formName.elements.length-1; i++ )
+	{
+	
+   	var fieldName = field[i].name;
+   	var fieldValue = field[i].value;
+	var fieldType = field[i].type;
+	
+   	params +=fieldName + ' ' +':'+'  ' +fieldValue + '    ' + '\n';
+	}
+	alert(params);
+    
+}
+</script>
+</head>
+<body>
+<form name="formName"onSubmit="extract()">
+  <fieldset>
+    <legend>Personal information:</legend>
+
+    First name:<br>
+    <input type="text" name="firstname" placeholder="First Name"><br><br>
+
+    Last name:<br>
+    <input type="text" name="lastname" placeholder="Last Name"><br><br>
+
+    About:<br><br>
+    <textarea rows = "5" cols = "50" name = "description" placeholder="BIO">
+         </textarea><br><br>
+	
+	<select name = "gender">
+            <option value = "Male">Male</option>
+            <option value = "Female">Female</option>
+        </select><br><br>
+    <select name = "dropdown">
+            <option value = "BDC8">BDC8</option>
+            <option value = "BDC6">BDC6</option>
+             <option value = "BDC6">BDC3</option>
+            <option value = "BDC6">BDC7</option>
+            <option value = "BDC6">BDC5</option>
+        </select><br><br>
+
+    <input type="submit" value="Submit">
+
+  </fieldset>
+</form>
+</body>
+    
+</html>
